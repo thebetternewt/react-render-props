@@ -23,7 +23,6 @@ class Icon extends Component {
             />
           </svg>
         );
-        break;
 
       default:
         break;
