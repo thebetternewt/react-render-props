@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Transition, animated, interpolate } from 'react-spring';
 
 import { Portal, absolute } from 'Utilities';
 import Icon from './Icon';
@@ -10,17 +11,50 @@ class Modal extends Component {
     const { children, toggle, on } = this.props;
     return (
       <Portal>
-        {on && (
-          <ModalWrapper>
-            <ModalCard>
-              <CloseButton onClick={toggle}>
-                <Icon name="close" color="#333" />
-              </CloseButton>
-              {children}
-            </ModalCard>
-            <Background onClick={toggle} />
-          </ModalWrapper>
-        )}
+        <Transition
+          native
+          config={{
+            tension: 180,
+            friction: 40
+          }}
+          from={{
+            opacity: 0,
+            bgOpacity: 0,
+            cardX: '-50vw',
+            cardRotate: '-180deg'
+          }}
+          enter={{ opacity: 1, bgOpacity: 0.5, cardX: '0', cardRotate: '0deg' }}
+          leave={{
+            opacity: 0,
+            bgOpacity: 0,
+            cardX: '50vw',
+            cardRotate: '180deg'
+          }}
+        >
+          {on &&
+            (styles => (
+              <ModalWrapper>
+                <ModalCard
+                  style={{
+                    ...styles,
+                    transform: interpolate(
+                      [styles.cardX, styles.cardRotate],
+                      (x, r) => `translate3d(${x}, 0, 0) rotate(${r})`
+                    )
+                  }}
+                >
+                  <CloseButton onClick={toggle}>
+                    <Icon name="close" color="#333" />
+                  </CloseButton>
+                  {children}
+                </ModalCard>
+                <Background
+                  style={{ opacity: styles.bgOpacity.interpolate(op => op) }}
+                  onClick={toggle}
+                />
+              </ModalWrapper>
+            ))}
+        </Transition>
       </Portal>
     );
   }
@@ -38,7 +72,9 @@ const ModalWrapper = styled.div`
   align-items: center;
 `;
 
-const ModalCard = styled(Card)`
+const AnimCard = Card.withComponent(animated.div);
+
+const ModalCard = styled(AnimCard)`
   position: relative;
   margin-bottom: 40vh;
   width: 500px;
@@ -55,7 +91,7 @@ const CloseButton = styled.button`
   cursor: pointer;
 `;
 
-const Background = styled.div`
+const Background = styled(animated.div)`
   ${absolute({})};
   width: 100%;
   height: 100%;

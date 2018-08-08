@@ -1,10 +1,12 @@
-import React, { Component, Fragment, createContext } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
 
 import { Toggle } from 'Utilities';
 import { Modal, Button } from 'components/Elements';
 import { User, UserProvider } from 'components/User';
+import Drag from './components/Drag';
+
+import logo from './logo.svg';
+import './App.css';
 
 class App extends Component {
   render() {
@@ -16,7 +18,7 @@ class App extends Component {
             <h1 className="App-title">Welcome to React</h1>
           </header>
 
-          <User />
+          <Drag />
 
           <Toggle>
             {({ on, toggle }) => (

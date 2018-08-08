@@ -9,5 +9,6 @@ export default styled.button`
   text-transform: uppercase;
   font-size: 1rem;
   padding: 5px 15px;
+  margin: 5px auto;
   ${elevation[1]};
 `;
