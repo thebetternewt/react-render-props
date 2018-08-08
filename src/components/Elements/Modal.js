@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Portal from './Portal';
+import { Portal, absolute } from 'Utilities';
+import Icon from './Icon';
+import { Card } from './Cards';
 
 class Modal extends Component {
   render() {
@@ -11,7 +13,9 @@ class Modal extends Component {
         {on && (
           <ModalWrapper>
             <ModalCard>
-              <CloseButton onClick={toggle}>Close</CloseButton>
+              <CloseButton onClick={toggle}>
+                <Icon name="close" color="#333" />
+              </CloseButton>
               {children}
             </ModalCard>
             <Background onClick={toggle} />
@@ -25,46 +29,36 @@ class Modal extends Component {
 export default Modal;
 
 const ModalWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
+  ${absolute({})};
   width: 100%;
   height: 100%;
-  opacity: 0.9;
 
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const ModalCard = styled.div`
+const ModalCard = styled(Card)`
   position: relative;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 15px;
+  margin-bottom: 40vh;
   width: 500px;
   max-width: 90vw;
-  box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.7);
   z-index: 10;
 `;
 
 const CloseButton = styled.button`
+  ${absolute({ x: 'right' })};
   border: none;
-  background-color: red;
-  color: #fff;
-  position: absolute;
-  top: 5px;
-  right: 5px;
+  background-color: transparent;
   text-transform: uppercase;
-  padding: 3px 5px;
+  padding: 10px 10px;
+  cursor: pointer;
 `;
 
 const Background = styled.div`
-  position: absolute;
+  ${absolute({})};
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
   background-color: #000;
-  opacity: 0.7;
+  opacity: 0.5;
 `;

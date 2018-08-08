@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ToggleRPC extends Component {
+class Toggle extends Component {
   state = {
     on: false
   };
@@ -18,4 +18,4 @@ class ToggleRPC extends Component {
   }
 }
 
-export default ToggleRPC;
+export default Toggle;
