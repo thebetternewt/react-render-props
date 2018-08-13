@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 import { Toggle } from 'Utilities';
 import { Modal, Button } from 'components/Elements';
-import { User, UserProvider } from 'components/User';
+import { UserProvider } from 'components/User';
 import Drag from './components/Drag';
 
 import logo from './logo.svg';
@@ -23,7 +23,9 @@ class App extends Component {
           <Toggle>
             {({ on, toggle }) => (
               <Fragment>
-                <Button onClick={toggle}>Login</Button>
+                <Button onClick={toggle} style={{ marginTop: '2rem' }}>
+                  Login
+                </Button>
                 <Modal on={on} toggle={toggle}>
                   <h1>Still in modal</h1>
                 </Modal>

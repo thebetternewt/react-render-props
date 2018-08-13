@@ -5,16 +5,17 @@ export const Card = styled.div`
   background-color: #fff;
   color: ${black};
   border-radius: 0;
-  max-width: 320px;
+  width: 320px;
+  max-width: 90vw;
   margin: 0 auto;
   padding: 15px;
-  ${elevation[2]};
+  ${elevation[5]};
   ${transition({
     properties: ['box-shadow']
   })};
 
   &:hover {
-    ${elevation[4]};
+    ${elevation[5]};
     transform: translateY(-5px);
   }
 `;
